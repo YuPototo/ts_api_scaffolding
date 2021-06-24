@@ -3,7 +3,7 @@ import { Todo } from "@dune/models/todo";
 
 const TODOS: Todo[] = [];
 
-export const createTodo: RequestHandler = (req, res, next) => {
+export const createTodo: RequestHandler = (req, res) => {
     const text = (req.body as { text: string }).text;
     const newTodo = new Todo(Math.random().toString(), text);
 
@@ -12,11 +12,11 @@ export const createTodo: RequestHandler = (req, res, next) => {
     res.status(201).json({ todo: newTodo });
 };
 
-export const getTodos: RequestHandler = (req, res, next) => {
+export const getTodos: RequestHandler = (req, res) => {
     res.json({ todos: TODOS });
 };
 
-export const updateTodo: RequestHandler<{ id: string }> = (req, res, next) => {
+export const updateTodo: RequestHandler<{ id: string }> = (req, res) => {
     const todoId = req.params.id;
     const updatedText = (req.body as { text: string }).text;
     const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
@@ -30,7 +30,7 @@ export const updateTodo: RequestHandler<{ id: string }> = (req, res, next) => {
     res.status(200).json({ todo: TODOS[todoIndex] });
 };
 
-export const deleteTodo: RequestHandler<{ id: string }> = (req, res, next) => {
+export const deleteTodo: RequestHandler<{ id: string }> = (req, res) => {
     const todoId = req.params.id;
     const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
 

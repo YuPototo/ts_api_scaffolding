@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 
 import todoRoutes from "@dune/routes/todos";
@@ -10,7 +10,7 @@ export async function createApp(): Promise<Express> {
 
     app.use("/todos", todoRoutes);
 
-    app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    app.use((err: Error, req: Request, res: Response) => {
         res.status(500).json({ message: err.message });
     });
 
