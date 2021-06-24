@@ -1,7 +1,7 @@
 import config from '@dune/config'
 import express from 'express';
 
-console.log(config);
+console.log(config); // 尝试使用 config
 
 const app = express();
 
