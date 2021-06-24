@@ -35,7 +35,7 @@ export const deleteTodo: RequestHandler<{ id: string }> = (req, res, next) => {
     const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
 
     if (todoIndex < 0) {
-        throw new Error("could not find todo");
+        throw new Error("could not find todo！");
     }
 
     TODOS.splice(todoIndex, 1);
