@@ -1,16 +1,14 @@
-import config from '@dune/config'
-import express from 'express';
 
-console.log(config); // 尝试使用 config
+import {createServer} from '@dune/server'
+import config from "@dune/config"
 
-const app = express();
 
-const port = 3000;
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+createServer()
+  .then(server => {
+    server.listen(config.port, () => {
+      console.info(`Listening on http://localhost:${config.port}`)
+    })
   })
-  
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+  .catch(err => {
+    console.error(`Error: ${err}`)
   })

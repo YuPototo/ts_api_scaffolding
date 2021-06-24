@@ -15,11 +15,11 @@ const env = dotenvExtended.load({
 const parsedEnv = dotenvParseVariables(env)
  
 interface Config {
-    testEnvLog: number
+    port: number
 }
 
 const config: Config = {
-    testEnvLog: parsedEnv.TEST_ENV_VAR as number,
+    port: parsedEnv.PORT as number,
 }
 
 export default config
