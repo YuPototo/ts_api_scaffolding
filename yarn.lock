@@ -550,6 +550,23 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@prisma/client@^2.25.0":
+  version "2.25.0"
+  resolved "https://registry.nlark.com/@prisma/client/download/@prisma/client-2.25.0.tgz#a81cdf93ce93128eb35298cf8935480f3da6cca3"
+  integrity sha1-qBzfk86TEo6zUpjPiTVIDz2mzKM=
+  dependencies:
+    "@prisma/engines-version" "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922"
+
+"@prisma/engines-version@2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922":
+  version "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922"
+  resolved "https://registry.nlark.com/@prisma/engines-version/download/@prisma/engines-version-2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922.tgz#b353576a97d0c1952fd4f4201189e845aaafbea8"
+  integrity sha1-s1NXapfQwZUv1PQgEYnoRaqvvqg=
+
+"@prisma/engines@2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922":
+  version "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922"
+  resolved "https://registry.nlark.com/@prisma/engines/download/@prisma/engines-2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922.tgz#68d7850d311df6d017e1b878adb19ec21483bcf0"
+  integrity sha1-aNeFDTEd9tAX4bh4rbGewhSDvPA=
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
   resolved "https://registry.nlark.com/@sinonjs/commons/download/@sinonjs/commons-1.8.3.tgz#3802ddd21a50a949b6721ddd72da36e67e7f1b2d"
@@ -3451,6 +3468,13 @@ pretty-format@^27.0.2:
     ansi-regex "^5.0.0"
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
+
+prisma@2.25.0:
+  version "2.25.0"
+  resolved "https://registry.nlark.com/prisma/download/prisma-2.25.0.tgz#1ebfef3e945a22c673b3e3c5100f098da475700d"
+  integrity sha1-Hr/vPpRaIsZzs+PFEA8JjaR1cA0=
+  dependencies:
+    "@prisma/engines" "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922"
 
 process-nextick-args@~2.0.0:
   version "2.0.1"

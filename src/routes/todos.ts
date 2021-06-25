@@ -5,7 +5,7 @@ import {
     getTodos,
     updateTodo,
     deleteTodo,
-} from "@dune/controllers/todos";
+} from "@dune/controllers/todo";
 
 const router = Router();
 
