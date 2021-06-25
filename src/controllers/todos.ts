@@ -5,10 +5,14 @@ const TODOS: Todo[] = [];
 
 export const createTodo: RequestHandler = (req, res) => {
     const text = (req.body as { text: string }).text;
+
+    if (text === undefined) {
+        return res.status(400).json({ message: "没有传 text" });
+    }
+
     const newTodo = new Todo(Math.random().toString(), text);
 
     TODOS.push(newTodo);
-
     res.status(201).json({ todo: newTodo });
 };
 
@@ -20,7 +24,6 @@ export const updateTodo: RequestHandler<{ id: string }> = (req, res) => {
     const todoId = req.params.id;
     const updatedText = (req.body as { text: string }).text;
     const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
-
     if (todoIndex < 0) {
         throw new Error("could not find todo");
     }
