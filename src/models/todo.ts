@@ -1,8 +1,6 @@
-import { PrismaClient, Todo } from "@prisma/client";
+import prisma, { Todo } from "@dune/db/client";
 
 // import logger from "@dune/utils/logger";
-
-const prisma = new PrismaClient();
 
 const createTodo = async (text: string): Promise<Todo> => {
     const todo = await prisma.todo.create({

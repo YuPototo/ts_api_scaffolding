@@ -6,9 +6,15 @@
     "scripts": {
         "test:unit": "ENV_FILE=./config/.env.test jest",
         "build": "tsc",
+        "migrate": "dotenv -e ./prisma/.env.dev npx prisma migrate dev --name init",
         "start": "ENV_FILE=./config/.env.prod node -r tsconfig-paths/register ./dist/index.js",
         "dev": "ENV_FILE=./config/.env.dev tsnd -r tsconfig-paths/register --respawn --transpile-only ./src/index.ts",
-        "lint": "eslint . --ext ts"
+        "lint": "eslint . --ext ts",
+        "test-docker:up": "docker compose -f docker-compose.test.yml up -d",
+        "migrate:test": "dotenv -e ./prisma/.env.db.test npx prisma migrate dev --name init",
+        "test:up": "yarn test-docker:up && yarn migrate:test",
+        "test": "ENV_FILE=./config/.env.test dotenv -e ./prisma/.env.db.test jest",
+        "test:down": "docker compose -f docker-compose.test.yml down"
     },
     "author": "",
     "license": "ISC",
@@ -16,6 +22,7 @@
         "@prisma/client": "^2.25.0",
         "@types/dotenv-parse-variables": "^2.0.0",
         "@types/morgan": "^1.9.2",
+        "dotenv-cli": "^4.0.0",
         "dotenv-extended": "^2.9.0",
         "dotenv-parse-variables": "^2.0.0",
         "express": "^4.17.1",
@@ -34,6 +41,7 @@
         "@typescript-eslint/parser": "^4.28.0",
         "eslint": "^7.29.0",
         "jest": "^27.0.5",
+        "jest-mock-extended": "^1.0.16",
         "prisma": "2.25.0",
         "supertest": "^6.1.3",
         "ts-jest": "^27.0.3",
