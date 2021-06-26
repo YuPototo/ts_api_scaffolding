@@ -3,24 +3,24 @@ import dotenvParseVariables from "dotenv-parse-variables";
 
 // winston log levels
 type LogLevel =
-    | "silent"
+    | "silent" // 默认选项，彻底不用 log
     | "error"
     | "warn"
     | "info"
-    | "http"
+    | "http" // prod 环境下，低于这个的不记录
     | "verbose"
-    | "debug"
+    | "debug" // dev 环境
     | "silly";
 
 // env
 const env = dotenvExtended.load({
-    path: process.env.ENV_FILE,
-    defaults: "./config/.env.defaults",
-    schema: "./config/.env.schema",
-    includeProcessEnv: true,
-    silent: false,
-    errorOnMissing: true,
-    errorOnExtra: true,
+    path: process.env.ENV_FILE, // 会在 package.json 内设置这个 ENV_FILE
+    defaults: "./config/.env.defaults", // 即刚才创建的 .env.defaults
+    schema: "./config/.env.schema", // 即刚才创建的 .env.schema
+    includeProcessEnv: true, // 把 process.env 里的变量也放进校验里
+    silent: false, // 没有 .env 或 .env.defaults 文件时，会 console.log 信息
+    errorOnMissing: true, // 缺少 schema 需要的变量时，会报错
+    errorOnExtra: true, // 存在多余的变量时，会报错
 });
 
 const parsedEnv = dotenvParseVariables(env);

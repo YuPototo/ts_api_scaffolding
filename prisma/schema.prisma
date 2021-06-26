@@ -15,4 +15,5 @@ model Todo {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     text      String   @db.VarChar(255)
+    // isDone    Boolean  @db.Boolean // 新增这行
 }

@@ -30,7 +30,7 @@ Integration test 会调用各个 endpoint，并跟真实数据库发生交互。
 
 ```JSON
     "scripts": {
-        "migrate:test": "dotenv -e ./prisma/.env.db.test npx prisma migrate dev --name init",
+        "migrate:test": "dotenv -e ./prisma/.env.db.test prisma migrate dev --name init",
     }
 ```
 
@@ -52,6 +52,8 @@ DATABASE_URL="postgresql://prisma:prisma@localhost:5433/tests"
         "test:up": "yarn test-docker:up && yarn migrate:test",
     }
 ```
+
+这里有个潜在问题，`yarn test-docker:up` 运行之后，docker 有可能还没准备好，导致无法连接数据库。这个时候就重复运行以下吧。
 
 ### 2. Run the tests
 
