@@ -101,8 +101,7 @@ yarn add @prisma/client
 ```
 
 `@prisma/client` 根据 schema 记录了 model 的各种 type 信息。
-
-如果 schema 改变，需要手动运行 `prisma generate`。
+会自动运行 `prisma generate` 命令。
 
 ### 第 6 步：建立 client
 
@@ -171,15 +170,10 @@ yarn migrate:dev
 
 会被提示给个名字。
 
-效果：DB 的 schema 更新
+效果：
 
-### 第 2 步：`prisma generate`
-
-```
-yarn prisma generate
-```
-
-会更新 `@prisma/client`。
+-   DB 的 schema 更新
+-   会更新 prisma client (`prisma migrate dev` 才会，`deplpoy`不会)
 
 之前项目里的下列代码就会报错，提示需要`isDone`
 

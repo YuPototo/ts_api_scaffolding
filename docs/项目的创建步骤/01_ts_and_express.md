@@ -28,23 +28,21 @@ yarn add express typescript
 ### 3. 新建 TypeScript 项目
 
 ```
-yarn tsc --init
+yarn tsc --init --rootDir ./src --outDir ./dist --noImplicitAny true --target "ES2018"
 ```
 
-这里都先使用默认配置。
-
-### 4. 修改 `tsconfig.json` 文件
+相比默认配置，修改了：
 
 -   `target` 改为 `ES2018`
 -   `outDir`: 改为 `./dist`
 -   `rootDir` 改为 `./src`
 -   `noImplicitAny`: 改为`true`
 
-### 5. 在根目录创建一个 `src` 文件夹
+### 4. 在根目录创建一个 `src` 文件夹
 
 用于写 ts 代码
 
-### 6. 安装 dev dependency
+### 5. 安装 dev dependency
 
 需要的 dev dependency:
 

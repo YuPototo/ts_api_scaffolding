@@ -1,0 +1,31 @@
+# NPM 相关
+node_modules
+
+# Docker 相关
+.dockerignore
+Dockerfile
+docker-compose*
+
+# env
+.env.dev
+.env.test
+.env.db.dev
+.env.db.test
+
+# 不要传 dist 文件夹
+dist
+
+# 系统相关
+.DS_Store
+
+# GIT 相关
+.git
+.gitignore
+
+
+# 文档
+docs
+
+# 测试
+tests
+jest.config.js
