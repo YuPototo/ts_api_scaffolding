@@ -4,8 +4,8 @@ services:
         image: nginx:stable-alpine
         volumes:
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-            - ./nginx/1_qingqu1024.com_bundle.crt:/etc/nginx/conf/1_qingqu1024.com_bundle.crt
-            - ./nginx/2_qingqu1024.com.key:/etc/nginx/conf/2_qingqu1024.com.key
+            - ./nginx/1_qingqu1024.com_bundle.crt:/etc/nginx/1_qingqu1024.com_bundle.crt
+            - ./nginx/2_qingqu1024.com.key:/etc/nginx/2_qingqu1024.com.key
         ports:
             - "80:80"
         depends_on:
