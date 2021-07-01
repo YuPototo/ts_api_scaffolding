@@ -29,7 +29,7 @@ export async function createApp(): Promise<Express> {
     setLogger(app);
 
     // routes
-    app.use("/todos", todoRoutes);
+    app.use("/api/todos", todoRoutes);
 
     // 500 错误
     app.use((err: Error, req: Request, res: Response) => {
