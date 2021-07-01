@@ -6,7 +6,22 @@ services:
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
         ports:
             - "80:80"
+        depends_on:
+            - node-app
+
+    db:
+        image: postgres:13
+        ports:
+            - "5433:5432"
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+        volumes:
+            - /db/pgData/:/var/lib/postgresql/data
 
     node-app:
         build: .
         command: yarn start
+        depends_on:
+            - db

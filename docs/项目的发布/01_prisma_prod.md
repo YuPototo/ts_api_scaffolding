@@ -5,7 +5,9 @@
 
 当我们把更新部署到 production 环境时，存在一个问题：如何把 database 的 schema 更新应用到 prod server 上？
 
-这主要依靠 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)
+这主要依靠 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)。
+
+这里假设只有 app 运行在 docker 内。
 
 ## 工作流
 
@@ -54,12 +56,34 @@ schema 更新后，需要手动更新生产环境下的 prisma client，即在�
 
 这里描述操作步骤，并解释命令。
 
-前两步就不解释了。
+前两步就不解释了。都在 dev 环境内。
 
 1. `prisma migrate dev`。这个参考 05_prisma_dev 文档。
 2. app 的开发，略
 
-### 两个 env 文件
+### 第 3 步：`prisma migrate deploy`
+
+在本地 dev 环境内。
+
+需要先在 `prisma`文件夹创建一个 env 文件: `.env.db.prod-migrate`，里面是 prod db 的 url
+
+在 `package.json` 内有一个 script:
+
+```json
+
+"scripts": {
+    "migrate:prod": "dotenv -e ./prisma/.env.db.prod-migrate prisma migrate deploy",
+}
+
+```
+
+直接在本地环境内运行 `yarn migrate:prod`，完成 migration。
+
+### 第 4 步到第 6 步：
+
+接下来都在 prod 环境进行。
+
+### 2 个 env 文件
 
 创建两个 env 文件，分别给 app 和 prisma 使用。
 
@@ -74,22 +98,6 @@ schema 更新后，需要手动更新生产环境下的 prisma client，即在�
 在 config 文件夹内创建一个 `.env.prod`，不进入 source control。
 
 这是给 app 用的。
-
-### 第 3 步：`prisma migrate deploy`
-
-在 `package.json` 内有一个 script:
-
-```json
-
-"scripts": {
-    "migrate:prod": "dotenv -e ./prisma/.env.db.prod prisma migrate deploy",
-}
-
-```
-
-直接在本地环境内运行 `yarn migrate:prod`，完成 migration。
-
-### 第 4 步到第 6 步：
 
 #### package.json
 

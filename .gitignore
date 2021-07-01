@@ -8,3 +8,4 @@ node_modules
 
 # prisma 的 env
 .env.db.prod
+.env.db.prod-migrate
