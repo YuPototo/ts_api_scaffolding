@@ -30,7 +30,7 @@ container 关闭后，里面的数据会被删除，我需要让数据库的数�
 在运行 docker compose 命令时，使用 `--env-file` flag:
 
 ```
-docker compose --env-file ./prisma/.env.db.prod -f docker-compose.prod.yml up -d
+docker-compose --env-file ./prisma/.env.db.prod -f docker-compose.prod.yml up -d
 ```
 
 因为这里已经成功把 `DATABASE_URL` 创建为了环境变量，下面的 `package.json` 的 script 可以简化：
@@ -53,12 +53,18 @@ docker compose --env-file ./prisma/.env.db.prod -f docker-compose.prod.yml up -d
 
 在 prod server 内创建一个 dir `/db/pgData`，这会是 mount 的源文件。
 
-1. prod 环境：`docker compose -f docker-compose.prod.yml up -d`，创建 image，并运行
+1. prod 环境：`docker-compose --env-file ./prisma/.env.db.prod -f docker-compose.prod.yml up -d`，创建 image，并运行
 2. 本地环境：`yarn migrate:prod`
 
-### 第 2 次部署
+### 第 2 次部署（待验证）
 
 如果 schema 发生了改变
 
 1. 本地环境：`yarn migrate:prod`
-2. prod 环境：`docker compose -f docker-compose.prod.yml up -d --build`
+2. prod 环境：`docker-compose --env-file ./prisma/.env.db.prod -f docker-compose.prod.yml up -d `
+
+这个方法似乎不行。可以考虑先 down，再 build，再 up
+
+-   `docker-compose -f docker-compose.prod.yml down`
+-   `docker-compose --env-file ./prisma/.env.db.prod -f docker-compose.prod.yml build --no-cache`
+-   `docker-compose --env-file ./prisma/.env.db.prod -f docker-compose.prod.yml up -d`

@@ -29,3 +29,6 @@ docs
 # 测试
 tests
 jest.config.js
+
+# nginx
+nginx
