@@ -8,6 +8,7 @@ services:
             - ./nginx/2_qingqu1024.com.key:/etc/nginx/2_qingqu1024.com.key
         ports:
             - "80:80"
+            - "443:443"
         depends_on:
             - node-app
 
