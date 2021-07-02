@@ -1,8 +1,8 @@
 import request from "supertest";
 import { Express } from "express-serve-static-core";
 
-import { createApp } from "@dune/app";
-import prisma from "@dune/db/client";
+import { createApp } from "../../src/app";
+import prisma from "../../src/db/client";
 
 let app: Express;
 
@@ -25,7 +25,7 @@ describe("GET /todos", () => {
     });
 
     it("should get two todos", async () => {
-        const res = await request(app).get(`/todos`);
+        const res = await request(app).get(`/api/todos`);
 
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty("todos");
@@ -48,7 +48,7 @@ describe("POST /todos", () => {
 
     it("should create a todo", async () => {
         const res = await request(app)
-            .post(`/todos`)
+            .post(`/api/todos`)
             .send({ text: "learn TypeScript" });
 
         expect(res.statusCode).toBe(201);
@@ -62,7 +62,7 @@ describe("POST /todos", () => {
 
     it("should throw error when incoming data is wrong", async () => {
         const res = await request(app)
-            .post(`/todos`)
+            .post(`/api/todos`)
             .send({ wrongKey: "learn TypeScript" });
 
         expect(res.statusCode).toBe(400);
@@ -95,7 +95,7 @@ describe("PATCH /todos", () => {
 
     it("should patch todo", async () => {
         const res = await request(app)
-            .patch(`/todos/${todoId}`)
+            .patch(`/api/todos/${todoId}`)
             .send({ text: "learn Postgres" });
 
         expect(res.statusCode).toBe(200);
@@ -126,10 +126,10 @@ describe("DELETE /todos", () => {
     });
 
     it("should delete todo", async () => {
-        const res = await request(app).delete(`/todos/${todoId}`);
+        const res = await request(app).delete(`/api/todos/${todoId}`);
         expect(res.statusCode).toBe(200);
 
-        const getResAfterDelete = await request(app).get(`/todos`);
+        const getResAfterDelete = await request(app).get(`/api/todos`);
         expect(getResAfterDelete.body.todos).toHaveLength(0);
     });
 });

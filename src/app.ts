@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import { Express } from "express-serve-static-core";
 import morgan from "morgan";
 import morganBody from "morgan-body";
@@ -6,6 +6,9 @@ import morganBody from "morgan-body";
 import config from "@dune/config";
 
 import todoRoutes from "@dune/routes/todos";
+import checksRoutes from "@dune/routes/checks";
+
+import logger from "./utils/logger";
 
 const setLogger = (app: Express) => {
     if (config.morganLogger) {
@@ -29,10 +32,13 @@ export async function createApp(): Promise<Express> {
     setLogger(app);
 
     // routes
+    app.use("/checks", checksRoutes); // 检查 express 可用
     app.use("/api/todos", todoRoutes);
 
-    // 500 错误
-    app.use((err: Error, req: Request, res: Response) => {
+    // Error-handling middleware: 必须使用 4个 argument
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+        logger.error(err.message);
         res.status(500).json({ message: err.message });
     });
 

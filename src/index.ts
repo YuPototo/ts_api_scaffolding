@@ -1,6 +1,7 @@
 import { createApp } from "@dune/app";
 import config from "@dune/config";
 import logger from "@dune/utils/logger";
+import prisma from "@dune/db/client";
 
 createApp()
     .then((app) => {
@@ -10,6 +11,16 @@ createApp()
     })
     .catch((err) => {
         logger.error(`Error: ${err}`);
+    });
+
+prisma
+    .$connect()
+    .then(() => {
+        logger.info("db connected");
+        prisma.$disconnect();
+    })
+    .catch((err) => {
+        logger.error(`db fail to connect: ${err}`);
     });
 
 // prisma 导致 ts-node-dev 失败。需要用下面的代码来解决。
