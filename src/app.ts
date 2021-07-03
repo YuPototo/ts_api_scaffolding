@@ -5,8 +5,9 @@ import morganBody from "morgan-body";
 
 import config from "@dune/config";
 
-import todoRoutes from "@dune/routes/todos";
-import checksRoutes from "@dune/routes/checks";
+import authRoutes from "@dune/routes/authRoute";
+import todoRoutes from "@dune/routes/todoRoute";
+import checksRoutes from "@dune/routes/checkRoute";
 
 import logger from "./utils/logger";
 
@@ -34,6 +35,7 @@ export async function createApp(): Promise<Express> {
     // routes
     app.use("/checks", checksRoutes); // 检查 express 可用
     app.use("/api/todos", todoRoutes);
+    app.use("/api/auth", authRoutes);
 
     // Error-handling middleware: 必须使用 4个 argument
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

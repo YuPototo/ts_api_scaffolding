@@ -61,15 +61,15 @@ DATABASE_URL="postgresql://prisma:prisma@localhost:5433/tests"
 
 ```JSON
     "scripts": {
-        "test": "ENV_FILE=./config/.env.test dotenv -e ./prisma/.env.db.test jest",
+        "test": "ENV_FILE=./config/.env.test dotenv -e ./prisma/.env.db.test -- jest --runInBand",
     }
 ```
 
 说明：
 
 -   `ENV_FILE=./config/.env.test`: app 在 test 环境下需要的 config 文件。
--   `dotenv -e ./prisma/.env.db.test`: prisma-client 需要的 DB URL 在这个文件里。
--   `jest`: 运行测试
+-   `dotenv -e ./prisma/.env.db.test --`: prisma-client 需要的 DB URL 在这个文件里,`--`分隔开指令
+-   `jest --runInBand`: 运行测试， `--runInBand` 保证 test 文件按顺序执行。因为我只用一个 db，所以不能同时运行。
 
 ### 3. 结束测试
 

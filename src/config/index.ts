@@ -26,6 +26,7 @@ const env = dotenvExtended.load({
 const parsedEnv = dotenvParseVariables(env);
 
 interface Config {
+    // port
     port: number;
 
     // logger
@@ -33,6 +34,10 @@ interface Config {
     morganBodyLogger: boolean;
     // delare loggerLevel config property
     loggerLevel: LogLevel;
+
+    // jwt
+    jwtSecret: string;
+    jwtLifetime: string;
 }
 
 const config: Config = {
@@ -41,6 +46,9 @@ const config: Config = {
     morganLogger: parsedEnv.MORGAN_LOGGER as boolean,
     morganBodyLogger: parsedEnv.MORGAN_BODY_LOGGER as boolean,
     loggerLevel: parsedEnv.LOGGER_LEVEL as LogLevel,
+
+    jwtSecret: parsedEnv.JWT_SECRET as string,
+    jwtLifetime: parsedEnv.JWT_LIFETIME as string,
 };
 
 export default config;
